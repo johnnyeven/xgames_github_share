@@ -43,12 +43,12 @@ function xgame_add_admin_page()
             <input class="button-primary" type="submit" name="save" />
             <?php
             $state = base64_encode(time());
-            $redirect = get_template_directory_uri() . '/github.php';
+            $redirect = XGAME_GST_URL . 'github_callback.php';
             $api_key = get_option( 'GITHUB_API_KEY' );
             $api_secret = get_option( 'GITHUB_API_SECRET_KEY' );
             $token = get_option( 'GITHUB_AUTHENTICATION_TOKEN' );
             if($api_key && $api_secret && !$token) {
-                $api_url = "https://github.com/login/oauth/authorize?client_id=$api_key&scope=&state=$state&∓redirect_uri=$redirect";
+                $api_url = "https://github.com/login/oauth/authorize?client_id=$api_key&scope=&state=$state&redirect_uri=$redirect";
                 ?>
                 <a class="button-primary" type="button" href="<?php echo $api_url; ?>">Authenticate</a>
                 <?php

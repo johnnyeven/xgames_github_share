@@ -1,5 +1,4 @@
 <?php
-use plugins\xgames_github_share\inc\Github;
 /*
  Plugin Name: xGame's Github sharing tools
 Plugin URI: http://www.johnnyeven.com/
