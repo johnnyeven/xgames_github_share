@@ -130,8 +130,7 @@ function exchange_access_token()
 	$github = new Github();
 	$result = $github->exchange_access_token();
 	$xgames_gst_options['gst_access_token'] = $result->access_token;
-	
-	update_option('xgames_gst_options', serialize($xgames_gst_options));
+	update_option('xgames_gst_options', $xgames_gst_options);
 	
 	redirect($xgames_gst_options['gst_base_path']);
 }
