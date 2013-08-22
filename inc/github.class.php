@@ -65,7 +65,6 @@ class Github
 		if (! empty ( $controller ))
 		{
 			$this->postPath = $this->oauthPath . $controller;
-			
 			$ch = curl_init ();
 			curl_setopt ( $ch, CURLOPT_URL, $this->postPath );
 			curl_setopt ( $ch, CURLOPT_POST, 1 );
