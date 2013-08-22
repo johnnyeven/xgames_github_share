@@ -1,0 +1,73 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: xgames-gst\n"
+"POT-Creation-Date: 2013-08-22 15:23+0800\n"
+"PO-Revision-Date: 2013-08-22 15:24+0800\n"
+"Last-Translator: johnnyeven <johnnyeven@gmail.com>\n"
+"Language-Team: johnnyeven <johnnyeven@gmail.com>\n"
+"Language: zh-cn\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.7\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__\n"
+"X-Poedit-Basepath: E:\\PHPnow\\htdocs\\wordpress\\wp-content\\plugins"
+"\\xgames_github_share\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: admin_page.php:4
+msgid "Hi there!  I'm just a plugin, not much I can do when called directly."
+msgstr "这是一个Wordpress插件，您不能直接访问。"
+
+#: admin_page.php:18
+msgid "General Settings"
+msgstr "全局设置"
+
+#: admin_page.php:19
+msgid "Client Id"
+msgstr "客户ID"
+
+#: admin_page.php:20
+msgid "Client Secret"
+msgstr "客户密钥"
+
+#: admin_page.php:37
+msgid "Your Client id of the Github application"
+msgstr "您Github Application的Client ID"
+
+#: admin_page.php:44
+msgid "Your Client secret of the Github application"
+msgstr "您Github Application的Client Secret"
+
+#: admin_page.php:55 admin_page.php:69
+msgid "xGame's Github Sharing Tools Option"
+msgstr "xGame Github 分享工具设置"
+
+#: admin_page.php:55
+msgid "xGame GST"
+msgstr "xGame Github 分享工具"
+
+#: admin_page.php:63
+msgid "You do not have sufficient permissions to access this page."
+msgstr "您没有足够的权限访问这个页面。"
+
+#: admin_page.php:75
+msgid "Save Changes"
+msgstr "保存设置"
+
+#: admin_page.php:83
+msgid "Authenticate"
+msgstr "前往认证"
+
+#: admin_page.php:89
+msgid "You can sign up for a Client Id here"
+msgstr "您可以在这里注册一个客户ID"
+
+#~ msgid "Access Token"
+#~ msgstr "访问凭证"
+
+#~ msgid "xGame's GitHub Sharing Tools Option"
+#~ msgstr "xGame Github 分享工具设置"
+
+#~ msgid "xGame Github Sharing Tools Option"
+#~ msgstr "xGame Github 分享工具设置"

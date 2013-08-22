@@ -9,9 +9,11 @@ if (! function_exists ( 'add_action' ))
 include_once 'functions/url.function.php';
 class Github
 {
+	private $options = null;
 	private $client_id = null;
 	private $client_secret = null;
-	private $scope = 'repo, user';
+	private $access_token = null;
+	private $scope = 'repo,user';
 	private $enableSSL = true;
 	private $postPath = null;
 	private $oauthPath = 'https://github.com/login/oauth/';
@@ -23,6 +25,13 @@ class Github
 
 	private function load_config()
 	{
+		$this->options = get_option('xgames_gst_options');
+		if(!empty($this->options))
+		{
+			$this->client_id = $this->options['gst_input_client_id'];
+			$this->client_secret = $this->options['gst_input_client_secret'];
+			$this->access_token = $this->options['gst_access_token'];
+		}
 	}
 
 	public function start_oauth()
@@ -31,10 +40,17 @@ class Github
 		{
 			$parameter = array(
 				'client_id'			=>	$this->client_id,
-				'scope'				=>	$this->scope
+				'scope'				=>	$this->scope,
+				'redirect_uri'		=>	urlencode($this->options['gst_base_path'] . '&action=callback'),
+				'state'				=>	base64_encode(time())
 			);
-			redirect($this-oauthPath . 'authorize?' . query_string($parameter));
+			redirect($this->oauthPath . 'authorize?' . query_string($parameter));
 		}
+	}
+	
+	public function exchange_access_token()
+	{
+		
 	}
 
 	public function post($controller, $parameter)
