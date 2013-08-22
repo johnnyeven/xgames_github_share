@@ -52,12 +52,13 @@ class Github
 		$parameter = array (
 			'client_id' => $this->client_id,
 			'client_secret' => $this->client_secret,
-			'redirect_uri' => urlencode ( $this->options ['gst_base_path'] . '&action=success' ),
 			'code' => $_GET ['code'] 
 		);
 		$result = $this->post ( 'access_token', $parameter );
-		echo $result;
-		exit ();
+		if(!empty($result))
+		{
+			return json_decode($result);
+		}
 	}
 
 	public function post($controller, $parameter)
@@ -69,6 +70,10 @@ class Github
 			curl_setopt ( $ch, CURLOPT_URL, $this->postPath );
 			curl_setopt ( $ch, CURLOPT_POST, 1 );
 			curl_setopt ( $ch, CURLOPT_POSTFIELDS, $parameter );
+			$header = array(
+				'Accept: application/json'
+			);
+			curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
 			curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, 1 );
 			curl_setopt ( $ch, CURLOPT_FOLLOWLOCATION, 1 );
 			curl_setopt ( $ch, CURLOPT_USERAGENT, $_SERVER ['HTTP_USER_AGENT'] );

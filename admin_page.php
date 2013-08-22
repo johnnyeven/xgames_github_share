@@ -27,6 +27,7 @@ function gst_option_init()
 	add_settings_section ( 'gst_options_top', __ ( 'General Settings', 'xgames-gst' ), 'gst_section_top', 'default' );
 	add_settings_field ( 'gst_input_client_id', __ ( 'Client Id', 'xgames-gst' ), 'gst_add_settings_client_id', 'default', 'gst_options_top' );
 	add_settings_field ( 'gst_input_client_secret', __ ( 'Client Secret', 'xgames-gst' ), 'gst_add_settings_client_secret', 'default', 'gst_options_top' );
+	add_settings_field('gst_access_token', __ ( 'Access Token', 'xgames-gst' ), 'gst_add_settings_access_token', 'default', 'gst_options_top');
 	add_settings_field('gst_base_path', __ ( 'Current Url', 'xgames-gst' ), 'gst_add_settings_base_path', 'default', 'gst_options_top');
 }
 
@@ -62,6 +63,13 @@ function gst_add_settings_base_path()
 	}
 	echo '<label><input id="gst_base_path" name="xgames_gst_options[gst_base_path]" type="text" value="' . $xgames_gst_options ['gst_base_path'] . '"/>  ';
 	echo __ ( 'Current url', 'xgames-gst' ) . '</label>';
+}
+
+function gst_add_settings_access_token()
+{
+	global $xgames_gst_options;
+	echo '<label><input id="gst_access_token" name="xgames_gst_options[gst_access_token]" type="text" value="' . $xgames_gst_options ['gst_access_token'] . '"/>  ';
+	echo __ ( 'Access Token', 'xgames-gst' ) . '</label>';
 }
 
 function gst_load_js_css()
@@ -118,7 +126,13 @@ function start_oauth()
 
 function exchange_access_token()
 {
+	global $xgames_gst_options;
 	$github = new Github();
-	$github->exchange_access_token();
+	$result = $github->exchange_access_token();
+	$xgames_gst_options['gst_access_token'] = $result->access_token;
+	
+	update_option('xgames_gst_options', serialize($xgames_gst_options));
+	
+	redirect($xgames_gst_options['gst_base_path']);
 }
 ?>
