@@ -99,6 +99,10 @@ function gst_add_admin_page()
 <?php
 	settings_fields ( 'xgames_gst_options' );
 	do_settings_sections ( 'default' );
+	if (! empty ( $xgames_gst_options ['gst_input_client_id'] ) && ! empty ( $xgames_gst_options ['gst_input_client_secret'] ) && ! empty ( $xgames_gst_options ['gst_access_token'] ))
+	{
+		do_settings_sections ( 'repo' );
+	}
 	echo " <p class='submit'> <input name='Submit' type='submit' class='button-primary' value=\"" . __ ( 'Save Changes', 'xgames-gst' ) . "\" />";
 	if (! empty ( $xgames_gst_options ['gst_input_client_id'] ) && ! empty ( $xgames_gst_options ['gst_input_client_secret'] ) && empty ( $xgames_gst_options ['gst_access_token'] ))
 	{
@@ -114,16 +118,6 @@ function gst_add_admin_page()
 	<p>
 		<a href="https://developer.github.com/" target="_blank"><?php echo __("You can sign up for a Client Id here", 'xgames-gst') ?></a>
 	</p>
-	<?php
-	if (! empty ( $xgames_gst_options ['gst_input_client_id'] ) && ! empty ( $xgames_gst_options ['gst_input_client_secret'] ) && ! empty ( $xgames_gst_options ['gst_access_token'] ))
-	{
-		echo '<form method="POST" action="options.php">';
-		settings_fields ( 'xgames_gst_options' );
-		do_settings_sections ( 'repo' );
-		echo " <p class='submit'> <input name='Submit' type='submit' class='button-primary' value=\"" . __ ( 'Save Changes', 'xgames-gst' ) . "\" />";
-		echo '</form>';
-	}
-	?>
 </div>
 <?php
 }
