@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xgames-gst\n"
-"POT-Creation-Date: 2013-08-22 15:23+0800\n"
-"PO-Revision-Date: 2013-08-22 15:24+0800\n"
+"POT-Creation-Date: 2013-08-23 09:46+0800\n"
+"PO-Revision-Date: 2013-08-23 09:46+0800\n"
 "Last-Translator: johnnyeven <johnnyeven@gmail.com>\n"
 "Language-Team: johnnyeven <johnnyeven@gmail.com>\n"
 "Language: zh-cn\n"
@@ -19,52 +19,62 @@ msgstr ""
 msgid "Hi there!  I'm just a plugin, not much I can do when called directly."
 msgstr "这是一个Wordpress插件，您不能直接访问。"
 
-#: admin_page.php:18
+#: admin_page.php:27
 msgid "General Settings"
 msgstr "全局设置"
 
-#: admin_page.php:19
+#: admin_page.php:28
 msgid "Client Id"
 msgstr "客户ID"
 
-#: admin_page.php:20
+#: admin_page.php:29
 msgid "Client Secret"
 msgstr "客户密钥"
 
-#: admin_page.php:37
+#: admin_page.php:30 admin_page.php:72
+msgid "Access Token"
+msgstr "访问凭证"
+
+#: admin_page.php:31
+msgid "Current Url"
+msgstr "当前页面的Url"
+
+#: admin_page.php:47
 msgid "Your Client id of the Github application"
 msgstr "您Github Application的Client ID"
 
-#: admin_page.php:44
+#: admin_page.php:54
 msgid "Your Client secret of the Github application"
 msgstr "您Github Application的Client Secret"
 
-#: admin_page.php:55 admin_page.php:69
+#: admin_page.php:65
+msgid "Current url, please do not modify"
+msgstr ""
+"当前页面的Url，将会作为redirect_uri参数传递，如果自动获取错误，请手动更正"
+
+#: admin_page.php:83 admin_page.php:97
 msgid "xGame's Github Sharing Tools Option"
 msgstr "xGame Github 分享工具设置"
 
-#: admin_page.php:55
+#: admin_page.php:83
 msgid "xGame GST"
 msgstr "xGame Github 分享工具"
 
-#: admin_page.php:63
+#: admin_page.php:91
 msgid "You do not have sufficient permissions to access this page."
 msgstr "您没有足够的权限访问这个页面。"
 
-#: admin_page.php:75
+#: admin_page.php:102
 msgid "Save Changes"
 msgstr "保存设置"
 
-#: admin_page.php:83
+#: admin_page.php:108
 msgid "Authenticate"
 msgstr "前往认证"
 
-#: admin_page.php:89
+#: admin_page.php:115
 msgid "You can sign up for a Client Id here"
 msgstr "您可以在这里注册一个客户ID"
-
-#~ msgid "Access Token"
-#~ msgstr "访问凭证"
 
 #~ msgid "xGame's GitHub Sharing Tools Option"
 #~ msgstr "xGame Github 分享工具设置"

@@ -1,3 +1,1 @@
-#gst_input_client_id {width:40%;}
-#gst_input_client_secret {width:40%;}
-#gst_base_path {width:50%;}
+#gst_input_client_id, #gst_input_client_secret, #gst_access_token, #gst_base_path {width:35%;min-width:200px;max-width:700px;}
