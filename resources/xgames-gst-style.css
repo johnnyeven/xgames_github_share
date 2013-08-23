@@ -4,7 +4,7 @@
 .xgame-gst-commit-detail {padding:5px;background:#fff;border:1px solid #b7c7cf;border-top:none;border-bottom-color:#d8e6ec}
 .xgame-gst-commit-gravatar {border-radius:3px;margin-right:3px;vertical-align:middle;}
 .xgame-gst-commit-author {font-weight:bold;}
-.xgame-gst-contents {border:1px solid #d8d8d8;border-top:none;background:#f8f8f8;position:relative;}
+.xgame-gst-contents {border:1px solid #d8d8d8;border-top:none;background:#f8f8f8;position:relative;overflow-x:hidden;overflow-y:auto;}
 .xgame-gst-list {display:block;margin:0;padding:0;float:left;}
 .xgame-gst-list li {list-style:none;margin:0;padding:0;line-height:16px;padding:7px;border-bottom:1px solid #EEE;cursor:pointer;}
 .xgame-gst-list li.xgame-gst-contents-last {border-bottom:none;}
