@@ -2,7 +2,7 @@
 .xgame-gst-container {background:#EEE;border-radius:3px;padding:3px;font:13px Helvetica, arial, freesans, clean, sans-serif;}
 .xgame-gst-commit-title {height:16px;line-height:16px;padding:8px;background:#e6f1f6;border:1px solid #b7c7cf;border-bottom-color:#d8e6ec;border-top-right-radius:2px;border-top-left-radius:2px;}
 .xgame-gst-commit-detail {height:20px;line-height:20px;padding:5px;background:#fff;border:1px solid #b7c7cf;border-top:none;border-bottom-color:#d8e6ec}
-.xgame-gst-commit-gravatar {border-radius:3px;margin-right:3px;vertical-align:middle;}
+.xgame-gst-commit-gravatar {border-radius:3px;margin-right:3px;vertical-align:top;}
 .xgame-gst-commit-author {font-weight:bold;}
 .xgame-gst-contents {border:1px solid #d8d8d8;border-top:none;background:#f8f8f8;position:relative;overflow-x:hidden;overflow-y:auto;}
 .xgame-gst-list {display:block;margin:0;padding:0;float:left;}
