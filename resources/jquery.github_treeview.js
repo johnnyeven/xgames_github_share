@@ -62,23 +62,30 @@
 											'<div id="xgame-gst-list-wrapper" class="xgame-gst-list-wrapper"></div>' );
 							$( "#xgame-gst-list-wrapper" ).append(
 									'<ul class="xgame-gst-list"></ul>' );
-							$( "#xgame-gst-list-wrapper > ul" ).width($( "#xgame-gst-contents" ).width());
+							var ulWidth = $( "#xgame-gst-contents" ).width();
+							$( "#xgame-gst-list-wrapper > ul" ).width( ulWidth );
 
 							request( "user/repos", {
 								access_token : settings.accessToken
 							}, userInfoCallback );
 
-							function request( method, parameter, callback ) {
-								$.get( settings.apiUrl + method + "?"
-										+ $.param( parameter ), callback );
+							function request( method, parameter, callback,
+									noPrefix ) {
+								if ( noPrefix ) {
+									$.get( method + "?" + $.param( parameter ),
+											callback );
+								} else {
+									$.get( settings.apiUrl + method + "?"
+											+ $.param( parameter ), callback );
+								}
 							}
 
 							function userInfoCallback( data ) {
 								if ( !data ) {
 									return;
 								}
-								if(data.length == 0) {
-									
+								if ( data.length == 0 ) {
+
 								} else {
 									var owner = data[0].owner;
 									$( "#xgame-gst-commit-title" ).text(
@@ -86,25 +93,68 @@
 									$( "#xgame-gst-commit-detail" )
 											.append(
 													'<img id="xgame-gst-commit-gravatar" class="xgame-gst-commit-gravatar" src="#" width="20" height="20" /><span id="xgame-gst-commit-author" class="xgame-gst-commit-author"></span>' );
-									$( "#xgame-gst-commit-gravatar" ).attr( "src",
-											owner.avatar_url );
-									$( "#xgame-gst-commit-author" )
-											.text( owner.login );
-									
-									for(var i in data) {
-										$( "#xgame-gst-list-wrapper > ul" ).append('<li><span class="xgame-gst-icon gst-repo"></span><a href="' + data[i].contents_url.replace('/{+path}', '') + '">' + data[i].name + '</a></li>');
+									$( "#xgame-gst-commit-gravatar" ).attr(
+											"src", owner.avatar_url );
+									$( "#xgame-gst-commit-author" ).text(
+											owner.login );
+
+									for ( var i in data ) {
+										$( "#xgame-gst-list-wrapper > ul" )
+												.append(
+														'<li><span class="xgame-gst-icon gst-repo"></span><a href="'
+																+ data[i].contents_url
+																		.replace(
+																				'/{+path}',
+																				'' )
+																+ '">'
+																+ data[i].name
+																+ '</a></li>' );
 									}
 
-									$( "#xgame-gst-list-wrapper > ul > li" ).mouseover(function() {
-										$(this).addClass('xgame-gst-current');
-									}).mouseout(function() {
-										$(this).removeClass('xgame-gst-current');
-									});
-									$( "#xgame-gst-list-wrapper > ul > li > a" ).click(function() {
-										alert($(this).attr('href'));
-										return false;
-									});
+									$( "#xgame-gst-list-wrapper > ul > li" )
+											.mouseover(
+													function() {
+														$( this )
+																.addClass(
+																		'xgame-gst-current' );
+													} )
+											.mouseout(
+													function() {
+														$( this )
+																.removeClass(
+																		'xgame-gst-current' );
+													} );
+									$( "#xgame-gst-list-wrapper > ul > li > a" )
+											.click(
+													function() {
+														request(
+																$( this ).attr(
+																		'href' ),
+																{
+																	access_token : settings.accessToken
+																},
+																pathCallback,
+																true );
+														return false;
+													} );
 								}
+							}
+
+							function pathCallback( data ) {
+								$( "#xgame-gst-list-wrapper" ).append(
+										'<ul class="xgame-gst-list"></ul>' );
+								var ul = $( "#xgame-gst-list-wrapper > ul" )
+										.eq( 1 );
+								ul.width( ulWidth );
+								for ( var i in data ) {
+									ul
+											.append( '<li><span class="xgame-gst-icon gst-repo"></span><a href="">'
+													+ data[i].name
+													+ '</a></li>' );
+								}
+								$( "#xgame-gst-list-wrapper" ).animate({
+									"left": -ulWidth
+								});
 							}
 						}
 					} );

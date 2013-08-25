@@ -10,7 +10,7 @@
 .xgame-gst-list li.xgame-gst-contents-last {border-bottom:none;}
 .xgame-gst-list li a, .xgame-gst-list li a:visited {text-decoration:none;color:#999;}
 .xgame-gst-current {background:#F1F9FC;}
-.xgame-gst-list-wrapper {position:absolute;top:0;left:0;}
+.xgame-gst-list-wrapper {position:absolute;top:0;left:0;width:3000px;}
 .xgame-gst-icon {display:block;float:left;width:16px;height:16px;margin-right:10px;line-height:16px;}
 .gst-repo {background:url(database-share.png) no-repeat;}
 .gst-folder {background:url(folder-horizontal.png) no-repeat;}
