@@ -29,6 +29,8 @@
 								settings.container = $( "#github_treeview_plugin" );
 							}
 							var root = settings.container;
+							var currentContentPath = "";
+							var currentRootPath = "";
 							root.addClass( 'xgame-gst-container' );
 							if ( settings.autoWidth ) {
 								settings.container.width( settings.container
@@ -44,26 +46,41 @@
 							}
 
 							root
-									.append( '<div id="xgame-gst-commit-title" class="xgame-gst-commit-title"></div>' );
-							root
 									.append( '<div id="xgame-gst-commit-detail" class="xgame-gst-commit-detail"></div>' );
+							root
+									.append( '<div class="xgame-gst-control" id="xgame-gst-control"><a class="minibutton primary" id="xgame-gst-btn-root" href="#">主页</a> <a class="minibutton" id="xgame-gst-btn-back" href="#">返回</a></div>' );
 							root
 									.append( '<div id="xgame-gst-contents" class="xgame-gst-contents"></div>' );
 							var contentHeight = root.height()
-									- $( "#xgame-gst-commit-title" )
-											.outerHeight()
 									- $( "#xgame-gst-commit-detail" )
-											.outerHeight();
+											.outerHeight()
+									- $( "#xgame-gst-control" ).outerHeight();
 							$( "#xgame-gst-contents" ).height(
 									contentHeight - 1 );
 
 							$( "#xgame-gst-contents" )
 									.append(
 											'<div id="xgame-gst-list-wrapper" class="xgame-gst-list-wrapper"></div>' );
+							var ulWidth = $( "#xgame-gst-contents" ).width();
+							$( "#xgame-gst-list-wrapper" )
+									.width( 2.5 * ulWidth );
 							$( "#xgame-gst-list-wrapper" ).append(
 									'<ul class="xgame-gst-list"></ul>' );
-							var ulWidth = $( "#xgame-gst-contents" ).width();
 							$( "#xgame-gst-list-wrapper > ul" ).width( ulWidth );
+
+							$( "#xgame-gst-btn-root" ).click( function() {
+								request( "user/repos", {
+									access_token : settings.accessToken
+								}, userInfoCallback );
+							} );
+							$( "#xgame-gst-btn-back" ).click( function() {
+								if ( $( this ).attr( "href" ) ) {
+									request( $( this ).attr( "href" ), {
+										access_token : settings.accessToken
+									}, pathCallback, true );
+								}
+								return false;
+							} );
 
 							request( "user/repos", {
 								access_token : settings.accessToken
@@ -111,25 +128,41 @@
 																+ '</a></li>' );
 									}
 
-									$( "#xgame-gst-list-wrapper > ul > li" )
-											.mouseover(
+									$( document )
+											.on(
+													"mouseover",
+													"#xgame-gst-list-wrapper > ul > li",
 													function() {
 														$( this )
 																.addClass(
 																		'xgame-gst-current' );
-													} )
-											.mouseout(
+													} );
+									$( document )
+											.on(
+													"mouseout",
+													"#xgame-gst-list-wrapper > ul > li",
 													function() {
 														$( this )
 																.removeClass(
 																		'xgame-gst-current' );
 													} );
-									$( "#xgame-gst-list-wrapper > ul > li > a" )
-											.click(
+									$( document )
+											.on(
+													"click",
+													"#xgame-gst-list-wrapper > ul > li",
 													function() {
+														var a = $( this ).find(
+																"a" );
+														currentContentPath = a
+																.attr( "href" );
+														// $("#xgame-gst-btn-back").attr("href",
+														// currentContentPath);
+														if ( !currentRootPath ) {
+															currentRootPath = a
+																	.attr( "href" );
+														}
 														request(
-																$( this ).attr(
-																		'href' ),
+																currentContentPath,
 																{
 																	access_token : settings.accessToken
 																},
@@ -146,15 +179,47 @@
 								var ul = $( "#xgame-gst-list-wrapper > ul" )
 										.eq( 1 );
 								ul.width( ulWidth );
+								var folder = [];
+								var files = [];
 								for ( var i in data ) {
+									if ( data[i].type == "file" ) {
+										files.push( data[i] );
+									} else {
+										folder.push( data[i] );
+									}
+								}
+								for ( i in folder ) {
 									ul
-											.append( '<li><span class="xgame-gst-icon gst-repo"></span><a href="">'
-													+ data[i].name
+											.append( '<li><span class="xgame-gst-icon gst-folder"></span><a href="'
+													+ currentRootPath
+													+ "/"
+													+ folder[i].path
+													+ '">'
+													+ folder[i].name
 													+ '</a></li>' );
 								}
-								$( "#xgame-gst-list-wrapper" ).animate({
-									"left": -ulWidth
-								});
+								for ( i in files ) {
+									ul
+											.append( '<li><span class="xgame-gst-icon gst-file"></span><a href="'
+													+ currentRootPath
+													+ "/"
+													+ files[i].path
+													+ '">'
+													+ files[i].name
+													+ '</a></li>' );
+								}
+								$( "#xgame-gst-list-wrapper" ).animate(
+										{
+											"left" : -ulWidth
+										},
+										'slow',
+										'swing',
+										function() {
+											$( "#xgame-gst-list-wrapper > ul" )
+													.eq( 0 ).remove();
+											$( "#xgame-gst-list-wrapper" ).css(
+													'left', 0 );
+										} );
 							}
 						}
 					} );
